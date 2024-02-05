@@ -1,15 +1,3 @@
-// window.addEventListener("DOMContentLoaded", init);
-
-// const apiUrl = "https://kea-alt-del.dk/t7/api/products"
-// fetch(apiUrl)
-//     .then(res => res.json())
-//     .then((data) => showProduct(data))
-
-// function showProduct(products) {
-//     console.log(products);
-//     products.forEach(showSingleProduct);
-// }
-
 window.addEventListener("DOMContentLoaded", init);
 
 const apiURL = "https://kea-alt-del.dk/t7/api/products";
