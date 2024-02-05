@@ -1,0 +1,18 @@
+* {
+    box-sizing: border-box;
+}
+img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.product_container {
+    display: grid;
+    margin: auto;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+.product_article {
+    border: 1px solid #ddd;
+    padding: 1rem;
+}

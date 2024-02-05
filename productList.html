@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Produktliste</title>
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/productList.css" />
+  </head>
+  <body>
+    <header>
+      <h1>FashionRUS</h1>
+      <nav></nav>
+    </header>
+    <section>
+      <h2>The Products</h2>
+      <div class="product_container"></div>
+    </section>
+    <script src="js/productList.js"></script>
+  </body>
+</html>
+<template class="product_template">
+  <a>
+  <article class="product_article">
+    <div class="product_image_container">
+      <img class="product_image" />
+    </div>
+    <h3 class="product_name">Goood Beer</h3>
+    <p class="brand_name">Drink god beer</p>
+    <p><span class="price"></span> DKK</p>
+  </article>
+  </a>
+</template>
