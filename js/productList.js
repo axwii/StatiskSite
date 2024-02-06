@@ -30,7 +30,17 @@ function showProducts(productJSON) {
     productClone.querySelector(".product_image").alt = `Picture of a ${product.productdisplayname} beer`;
     productClone.querySelector(".product_name").textContent = product.productdisplayname;
     productClone.querySelector(".brand_name").textContent = product.brandname;
-    productClone.querySelector(".price").textContent = product.price;
+    productClone.querySelector(".price").textContent = product.price + " DKK";
+    if(product.discount > 0){
+      productClone.querySelector(".discount").textContent = product.discount + "%";
+      productClone.querySelector(".price").classList.add("discounted");
+      productClone.querySelector(".discounted_price").textContent = Math.round(product.price - (product.price * product.discount / 100)) + " DKK";
+    }
+
+    if(product.soldout === 1){
+      productClone.querySelector(".sold_out").style.display = "block";
+      console.log("Sold out");
+    }
     productContainer.appendChild(productClone);
   });
 }
