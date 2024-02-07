@@ -1,6 +1,9 @@
 window.addEventListener("DOMContentLoaded", init);
 
-const apiURL = "https://kea-alt-del.dk/t7/api/products";
+const parameter = new URLSearchParams(window.location.search);
+const season = parameter.get("season");
+
+const apiURL = `https://kea-alt-del.dk/t7/api/products?season=${season}`;
 
 let productTemplate;
 let productContainer;
