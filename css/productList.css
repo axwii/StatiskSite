@@ -35,6 +35,10 @@ img {
   text-decoration: line-through;
 }
 
+.discounted_price {
+  color: #f42434;
+}
+
 /* .sold_out {
   border: solid 2px red;
 } */
