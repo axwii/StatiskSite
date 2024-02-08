@@ -10,7 +10,7 @@ const apiURL = season
   ? `https://kea-alt-del.dk/t7/api/products?subcategory=${subcategory}`
   : category
   ? `https://kea-alt-del.dk/t7/api/products?category=${category}`
-  : 'https://kea-alt-del.dk/t7/api/products';
+  : "https://kea-alt-del.dk/t7/api/products";
 
 // let apiURL;
 
