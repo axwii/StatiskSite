@@ -1,9 +1,29 @@
 window.addEventListener("DOMContentLoaded", init);
 
 const parameter = new URLSearchParams(window.location.search);
-const season = parameter.get("season");
 
-const apiURL = `https://kea-alt-del.dk/t7/api/products?season=${season}`;
+// const season = parameter.get("season") || "";
+// const subcategories = parameter.getAll("subcategories") || "";
+// const categories = parameter.getAll("categories") || "";
+
+// const apiURL = `https://kea-alt-del.dk/t7/api/products?season=${season}&subcategories=${subcategories.join("&subcategories=")}&categories=${categories.join("&categories=")}`;
+
+let apiURL;
+
+const season = parameter.get('season');
+const subcategories = parameter.get('subcategory');
+const categories = parameter.get('category');
+
+if (season) {
+  apiURL = `https://kea-alt-del.dk/t7/api/products?season=${season}`;
+} else if (subcategories) {
+  apiURL = `https://kea-alt-del.dk/t7/api/products?subcategory=${subcategories}`;
+} else if (categories) {
+  apiURL = `https://kea-alt-del.dk/t7/api/products?category=${categories}`;
+} else {
+  apiURL = 'https://kea-alt-del.dk/t7/api/products';
+  console.log("Api URL" + apiURL);
+}
 
 let productTemplate;
 let productContainer;
