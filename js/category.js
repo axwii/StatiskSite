@@ -9,6 +9,8 @@ const apiURLs = [
 let seasonTemplate;
 let subcategoryTemplate;
 let categoryTemplate;
+let seasonContainer;
+let subcategoryContainer;
 let categoryContainer;
 
 function init() {
@@ -18,12 +20,15 @@ function init() {
   subcategoryTemplate = document.querySelector(".subcategory_template");
   categoryTemplate = document.querySelector(".category_template");
 
+  seasonContainer = document.querySelector(".season_container");
+  subcategoryContainer = document.querySelector(".subcategory_container");
+  categoryContainer = document.querySelector(".category_container");
+
   console.log("season_template", seasonTemplate);
   console.log("subcategory_template", subcategoryTemplate);
   console.log("category_template", categoryTemplate);
-
-  categoryContainer = document.querySelector(".category_container");
   console.log("category_container", categoryContainer);
+
 
   apiURLs.forEach(apiURL => {
     fetch(apiURL)
@@ -49,7 +54,7 @@ function showSeasons(seasonJSON) {
     seasonClone = seasonTemplate.cloneNode(true).content;
     seasonClone.querySelector("a").href = `productList.html?season=${season.season}`;
     seasonClone.querySelector(".season_name").textContent = season.season;
-    categoryContainer.appendChild(seasonClone);
+    seasonContainer.appendChild(seasonClone);
   });
 }
 
@@ -61,7 +66,7 @@ function showSubcategories(subcategoryJSON) {
     subcategoryClone = subcategoryTemplate.cloneNode(true).content;
     subcategoryClone.querySelector("a").href = `productList.html?subcategory=${subcategory.subcategory}`;
     subcategoryClone.querySelector(".subcategory_name").textContent = subcategory.subcategory;
-    categoryContainer.appendChild(subcategoryClone);
+    subcategoryContainer.appendChild(subcategoryClone);
   });
 }
 
