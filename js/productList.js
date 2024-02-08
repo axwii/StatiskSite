@@ -2,35 +2,36 @@ window.addEventListener("DOMContentLoaded", init);
 
 const parameter = new URLSearchParams(window.location.search);
 
-// const season = parameter.get("season") || "";
-// const subcategories = parameter.getAll("subcategories") || "";
-// const categories = parameter.getAll("categories") || "";
+const { season, subcategory, category } = Object.fromEntries(parameter.entries());
 
-// const apiURL = `https://kea-alt-del.dk/t7/api/products?season=${season}&subcategories=${subcategories.join("&subcategories=")}&categories=${categories.join("&categories=")}`;
+const apiURL = season
+  ? `https://kea-alt-del.dk/t7/api/products?season=${season}`
+  : subcategory
+  ? `https://kea-alt-del.dk/t7/api/products?subcategory=${subcategory}`
+  : category
+  ? `https://kea-alt-del.dk/t7/api/products?category=${category}`
+  : 'https://kea-alt-del.dk/t7/api/products';
 
-let apiURL;
+// let apiURL;
 
-const season = parameter.get('season');
-const subcategories = parameter.get('subcategory');
-const categories = parameter.get('category');
+// const season = parameter.get('season');
+// const subcategories = parameter.get('subcategory');
+// const categories = parameter.get('category');
 
-if (season) {
-  apiURL = `https://kea-alt-del.dk/t7/api/products?season=${season}`;
-} else if (subcategories) {
-  apiURL = `https://kea-alt-del.dk/t7/api/products?subcategory=${subcategories}`;
-} else if (categories) {
-  apiURL = `https://kea-alt-del.dk/t7/api/products?category=${categories}`;
-} else {
-  apiURL = 'https://kea-alt-del.dk/t7/api/products';
-  console.log("Api URL" + apiURL);
-}
+// if (season) {
+//   apiURL = `https://kea-alt-del.dk/t7/api/products?season=${season}`;
+// } else if (subcategories) {
+//   apiURL = `https://kea-alt-del.dk/t7/api/products?subcategory=${subcategories}`;
+// } else if (categories) {
+//   apiURL = `https://kea-alt-del.dk/t7/api/products?category=${categories}`;
+// } else {
+//   apiURL = 'https://kea-alt-del.dk/t7/api/products';
+//   console.log("Api URL" + apiURL);
+// }
 
-let productTemplate;
-let productContainer;
+let productTemplate, productContainer;
 
 function init() {
-  console.log("init");
-
   productTemplate = document.querySelector(".product_template");
   console.log("product_template", productTemplate);
 
@@ -48,22 +49,20 @@ function showProducts(productJSON) {
   productJSON.forEach((product) => {
     console.log("Product", product);
     productClone = productTemplate.cloneNode(true).content;
-    productClone.querySelector("a").href = `product.html?id=${product.id}`;
-    productClone.querySelector(".product_image").src = `https://kea-alt-del.dk/t7/images/webp/640/${product.id}.webp`;
-    productClone.querySelector(".product_image").alt = `Picture of a ${product.productdisplayname} beer`;
+
+    const imgSrc = `https://kea-alt-del.dk/t7/images/webp/640/${product.id}.webp`;
+    const discountedPrice = product.discount > 0 ? Math.round(product.price - (product.price * product.discount / 100)) + " DKK" : "";
+
+    Object.assign(productClone.querySelector(".product_image"), { src: imgSrc, alt: `Picture of a ${product.productdisplayname} beer` });
     productClone.querySelector(".product_name").textContent = product.productdisplayname;
     productClone.querySelector(".brand_name").textContent = product.brandname;
+    productClone.querySelector(".sold_out").style.display = product.soldout === 1 ? "block" : "none";
     productClone.querySelector(".price").textContent = product.price + " DKK";
-    if(product.discount > 0){
-      // productClone.querySelector(".discount").textContent = product.discount + "%";
-      productClone.querySelector(".price").classList.add("discounted");
-      productClone.querySelector(".discounted_price").textContent = Math.round(product.price - (product.price * product.discount / 100)) + " DKK";
-    }
+    productClone.querySelector(".price").className = product.discount > 0 ? "discounted" : "";    
+    productClone.querySelector(".discounted_price").textContent = discountedPrice;
 
-    if(product.soldout === 1){
-      productClone.querySelector(".sold_out").style.display = "block";
-      console.log("Sold out");
-    }
+    productClone.querySelector("a").href = `product.html?id=${product.id}`;
     productContainer.appendChild(productClone);
+
   });
 }
