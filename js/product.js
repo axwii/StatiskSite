@@ -21,7 +21,9 @@ function showProduct(product){
     document.querySelector(".info .base_colour").textContent = product.basecolour;
     document.querySelector(".info .rel_id").textContent = product.relid;
     document.querySelector(".info .brand_name").textContent = product.brandname;
-    document.querySelector(".info .brand_bio").textContent = product.brandbio;
-    document.querySelector(".info .brand_image").src = product.brandimage;
-    document.querySelector(".info .brand_image").alt = product.brandname;
+    document.querySelector(".info .brand_bio").textContent = product.brandbio ? `"${product.brandbio}"` : "";
+    if(product.brandimage){
+        document.querySelector(".brand_image").src = product.brandimage;
+        document.querySelector(".brand_image").alt = product.brandname;
+    }
 }
