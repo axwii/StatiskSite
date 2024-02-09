@@ -5,7 +5,12 @@ img {
   width: 100%;
   height: auto;
   display: block;
+  transition: transform 0.3s ease-in-out;
 }
+.product_article:hover img {
+  transform: scale(1.1);
+}
+
 .product_container {
   display: grid;
   margin: auto;
@@ -16,6 +21,10 @@ img {
   position: relative;
   border: 1px solid #ddd;
   padding: 1rem;
+  overflow: hidden;
+}
+.product_image_container {
+  overflow: hidden;
 }
 
 .link {
@@ -57,4 +66,16 @@ img {
     rgba(33, 33, 33, 0.69) 60%,
     rgba(255, 255, 255, 0) 98%
   );
+  z-index: 1;
+}
+
+
+.brand_name{
+  font-weight: 600;
+  font-size: medium;
+  margin: 1.5rem 0 0.3rem 0;
+}
+
+.product_name{
+  margin: 0.3rem 0 1rem 0;
 }
